@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://db1fesf5rvpw7"]
+
+[ext_resource type="Script" path="res://grid.gd" id="1_wr20f"]
+[ext_resource type="Texture2D" uid="uid://c1kjhll7463os" path="res://Res/UI/minesweep/88×88_格子_未开启.png" id="2_4ql1w"]
+[ext_resource type="Texture2D" uid="uid://ctwuyeqp374tk" path="res://Res/UI/minesweep/数字 1_86×86.png" id="3_idkgw"]
+[ext_resource type="Texture2D" uid="uid://dcg147say1ed1" path="res://Res/UI/minesweep/数字 2_86×86.png" id="4_wtw67"]
+[ext_resource type="Texture2D" uid="uid://brsqnisb1x8xa" path="res://Res/UI/minesweep/数字 3_86×86.png" id="5_f88j3"]
+[ext_resource type="Texture2D" uid="uid://dmokb2sxy1kl6" path="res://Res/UI/minesweep/数字 4_86×86.png" id="6_p11jg"]
+[ext_resource type="Texture2D" uid="uid://btpbgthmc70jr" path="res://Res/UI/minesweep/数字 5_86×86.png" id="7_y0jka"]
+[ext_resource type="Texture2D" uid="uid://bew41pxd6wl6x" path="res://Res/UI/minesweep/数字 6_86×86.png" id="8_kluw8"]
+[ext_resource type="Texture2D" uid="uid://cjmvnkguhumvv" path="res://Res/UI/minesweep/72×72旗子.png" id="9_iehl5"]
+[ext_resource type="Texture2D" uid="uid://tcepgk0skxev" path="res://Res/UI/minesweep/86×86_地雷_爆炸.png" id="10_pf2ih"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h77vl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_idkgw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wtw67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f88j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p11jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y0jka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kluw8")
+}],
+"loop": false,
+"name": &"num",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("flag", "label", "open", "mine")]
+position = Vector2(82, 260)
+script = ExtResource("1_wr20f")
+flag = NodePath("Flag")
+label = NodePath("AnimatedSprite2D")
+open = NodePath("Sprite2D")
+mine = NodePath("mine")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4ql1w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h77vl")
+animation = &"num"
+
+[node name="Flag" type="Sprite2D" parent="."]
+texture = ExtResource("9_iehl5")
+
+[node name="mine" type="Sprite2D" parent="."]
+texture = ExtResource("10_pf2ih")

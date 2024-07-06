@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu1mtuuva45sf"]
+
+[ext_resource type="Script" path="res://menu_item.gd" id="1_qaqcx"]
+[ext_resource type="Texture2D" uid="uid://vnfk1pdrsj8s" path="res://Res/UI/menu/blue_1.png" id="2_t0xa5"]
+[ext_resource type="Texture2D" uid="uid://bhpvkervvosok" path="res://Res/Icon/menu_icon/MyGames.png" id="3_ym6l1"]
+[ext_resource type="FontFile" uid="uid://bdlo0w3gdm85o" path="res://Res/font/windows-xp-tahoma/windows-xp-tahoma.ttf" id="4_7kpxs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5scg"]
+font = ExtResource("4_7kpxs")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="Control" node_paths=PackedStringArray("highlight", "icon", "label")]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qaqcx")
+highlight = NodePath("Highlight")
+icon = NodePath("Icon")
+label = NodePath("Label")
+
+[node name="Highlight" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 180.0
+offset_bottom = 54.0
+texture = ExtResource("2_t0xa5")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 1026.0
+offset_bottom = 1026.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_ym6l1")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 63.0
+offset_top = 14.0
+offset_right = 196.0
+offset_bottom = 48.0
+text = "Minesweep"
+label_settings = SubResource("LabelSettings_e5scg")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

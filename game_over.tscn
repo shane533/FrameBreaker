@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dexvevpo6xiwn"]
+
+[ext_resource type="FontFile" uid="uid://bdlo0w3gdm85o" path="res://Res/font/windows-xp-tahoma/windows-xp-tahoma.ttf" id="1_5rfgm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wj0nh"]
+font = ExtResource("1_5rfgm")
+font_size = 64
+
+[node name="GameOverLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Game Over?"
+label_settings = SubResource("LabelSettings_wj0nh")
