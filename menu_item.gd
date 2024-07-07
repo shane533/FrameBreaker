@@ -23,7 +23,7 @@ func init(id, url, dname, is_sub):
 	_id = id
 	_is_sub = is_sub
 	highlight.visible = false
-	highlight.texture = load("res://Res/UI/menu/blue_2.png") if is_sub else load("res://Res/UI/menu/blue_1.png")
+	highlight.texture = load("res://Res/UI/menu/blue_1.png") if is_sub else load("res://Res/UI/menu/blue_2.png")
 	var png = "res://Res/Icon/menu_icon/%s" % url 
 	icon.texture = load(png)
 	label.text = dname
@@ -55,8 +55,9 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
-		if _id == eMenuID.MINE_SWEEP:
-			s_click_mine_sweep.emit()
+		if highlight.visible:
+			if _id == eMenuID.MINE_SWEEP:
+				s_click_mine_sweep.emit()
 
 func _on_mouse_entered():
 	s_hover_menu_item.emit(_id)

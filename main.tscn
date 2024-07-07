@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=130 format=3 uid="uid://qsc1p3jienqa"]
 
 [ext_resource type="Texture2D" uid="uid://bgxyslds8up10" path="res://Res/UI/wx/wx_bg.png" id="1_v0lvc"]
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
@@ -55,6 +55,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ccngg"]
 font = ExtResource("41_6wad0")
 font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofpy5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfnrs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k58nl"]
 atlas = ExtResource("27_4i3w1")
@@ -715,8 +719,8 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 453.529
 offset_top = -0.352963
-offset_right = 660.529
-offset_bottom = 115.647
+offset_right = 647.529
+offset_bottom = 43.647
 texture = ExtResource("16_6ofjd")
 
 [node name="GamesMenu" type="VBoxContainer" parent="StartMenu/GameMenu"]
@@ -799,17 +803,17 @@ texture = ExtResource("14_jigep")
 layout_mode = 2
 texture = ExtResource("15_qq77j")
 
-[node name="TextEdit" type="TextEdit" parent="WX/Control"]
+[node name="TextEdit" type="LineEdit" parent="WX/Control"]
 layout_mode = 0
 offset_left = 408.0
 offset_top = 677.0
 offset_right = 824.0
-offset_bottom = 787.0
-theme_override_colors/background_color = Color(0.960784, 0.960784, 0.960784, 1)
+offset_bottom = 725.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
-caret_type = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ofpy5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kfnrs")
 caret_blink = true
 caret_blink_interval = 0.2
 
@@ -963,6 +967,7 @@ position = Vector2(345, 945)
 texture = ExtResource("51_jentf")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="text_submitted" from="WX/Control/TextEdit" to="." method="_on_text_edit_text_submitted"]
 [connection signal="pressed" from="WX/Control/Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="WX/Control/Content/FirstLine/AvatarFrame" to="." method="_on_avatar_frame_mouse_entered"]
 [connection signal="mouse_exited" from="WX/Control/Content/FirstLine/AvatarFrame" to="." method="_on_avatar_frame_mouse_exited"]

@@ -4,10 +4,10 @@ class_name Main
 
 var MenuItemConfigLeft = [
 	{"icon" : "Favorites.png",
-	"text" : "Favorites"
+	"text" : "CGJ 2024"
 	},
 	{"icon" : "FolderOpened.png",
-	"text" : "Opened Folder"
+	"text" : "Limited and Limitless"
 	},
 	{"icon" : "Hearts.png",
 	"text" : "Limitless NIC"
@@ -67,7 +67,7 @@ var MenuItemConfigSecond = [
 	"text" : "My Music"
 	},
 	{"icon" : "MyNetworkPlaces.png",
-	"text" : "My NetworkPlaces"
+	"text" : "My Network"
 	},
 	{"icon" : "MyPictures.png",
 	"text" : "My Pictures"
@@ -133,7 +133,7 @@ const BOUNCE_TIMES:int = 7
 @export var newLineYours: Control
 @export var wx_yundong: Control
 @export var tap_label: Control
-@export var input_text: TextEdit
+@export var input_text: LineEdit
 @export var scroller: ScrollContainer
 @export var start_menu: Control
 @export var left_list: VBoxContainer
@@ -383,7 +383,7 @@ func show_all_programs_menu():
 	for obj in MenuItemConfigSecond:
 		var item = menu_item_ts.instantiate()
 		var id = MenuItem.eMenuID.GAMES if obj.text == "Games" else MenuItem.eMenuID.NONE
-		item.init(id, obj.icon, obj.text, true)
+		item.init(id, obj.icon, obj.text, false)
 		#item.scale = Vector2(0.5, 0.5) 
 		item.s_hover_menu_item.connect(on_menu_hover)
 		#left_list.add_child(item)
@@ -453,7 +453,7 @@ func open_start_menu():
 	for obj in MenuItemConfigLeft:
 		var item = menu_item_ts.instantiate()
 		var id = MenuItem.eMenuID.ALL_PROGRAMS if obj.text == "All Programs" else MenuItem.eMenuID.NONE
-		item.init(id, obj.icon, obj.text, false)
+		item.init(id, obj.icon, obj.text, true)
 		item.s_hover_menu_item.connect(on_menu_hover)
 		left_list.add_child(item)
 		count = count + 1
@@ -464,7 +464,7 @@ func open_start_menu():
 	for obj in MenuItemConfigRight:
 		var item = menu_item_ts.instantiate()
 		var id = MenuItem.eMenuID.ALL_PROGRAMS if obj.text == "All Programs" else MenuItem.eMenuID.NONE
-		item.init(id, obj.icon, obj.text, false)
+		item.init(id, obj.icon, obj.text, true)
 		right_list.add_child(item)
 		count = count + 1
 		if count == 3 or count == 6:
@@ -644,8 +644,8 @@ func quit():
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init()
-	#debug_desktop()
+	#init()
+	debug_desktop()
 	pass # Replace with function body.
 
 func debug_desktop():
@@ -715,4 +715,9 @@ func _on_avatar_frame_mouse_entered():
 
 func _on_avatar_frame_mouse_exited():
 	_focus_on_avatar_frame = false
+	pass # Replace with function body.
+
+
+func _on_text_edit_text_submitted(new_text):
+	_on_button_pressed()
 	pass # Replace with function body.
