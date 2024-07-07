@@ -9,8 +9,8 @@ enum eMenuID {
 	MINE_SWEEP
 }
 
-signal s_hover_menu_item(id: eMenuID)
-signal s_click_mine_sweep
+signal s_click_menu_item(id: eMenuID)
+#signal s_click_mine_sweep
 
 @export var highlight: TextureRect
 @export var icon: TextureRect
@@ -59,11 +59,11 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		if highlight.visible:
-			if _id == eMenuID.MINE_SWEEP:
-				s_click_mine_sweep.emit()
+			s_click_menu_item.emit(_id)
+			#if _id == eMenuID.MINE_SWEEP:
+				#s_click_mine_sweep.emit()
 
 func _on_mouse_entered():
-	s_hover_menu_item.emit(_id)
 	update_state(true)
 	
 	pass # Replace with function body.

@@ -253,7 +253,9 @@ func jump_down():
 	var tween = create_tween()
 	tween.tween_property(avatar, "position:y", avatar.position.y+FALL_HEIGHT, 0.5).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(avatar_anim.bind("land"))
-	tween.tween_interval(1)
+	tween.tween_interval(0.6)
+	tween.tween_callback(avatar_anim.bind("idle"))
+	tween.tween_interval(0.5)
 	tween.tween_callback(finish_tween_submit)
 
 func avatar_anim(ani):
@@ -379,12 +381,14 @@ func move_to_games_menu():
 	tween.tween_callback(stop_moving)
 	
 
-func on_menu_hover(id: MenuItem.eMenuID):
+func on_menu_click(id: MenuItem.eMenuID):
 	match id:
 		MenuItem.eMenuID.ALL_PROGRAMS:
 			show_all_programs_menu()
 		MenuItem.eMenuID.GAMES:
 			show_game_menu()
+		MenuItem.eMenuID.MINE_SWEEP:
+			on_click_minesweep()
 
 func show_all_programs_menu():
 	if _state != GameState.WAIT_FOR_SUB_MENU:
@@ -397,7 +401,7 @@ func show_all_programs_menu():
 		var id = MenuItem.eMenuID.GAMES if obj.text == "Games" else MenuItem.eMenuID.NONE
 		item.init(id, obj.icon, obj.text, false)
 		#item.scale = Vector2(0.5, 0.5) 
-		item.s_hover_menu_item.connect(on_menu_hover)
+		item.s_click_menu_item.connect(on_menu_click)
 		#left_list.add_child(item)
 		second_menu.get_child(0).add_child(item)
 	next_state()
@@ -413,8 +417,8 @@ func show_game_menu():
 		var id = MenuItem.eMenuID.MINE_SWEEP if obj.text == "MineSweep" else MenuItem.eMenuID.NONE
 		item.init(id, obj.icon, obj.text, true)
 		#item.scale = Vector2(0.5, 0.5) 
-		item.s_hover_menu_item.connect(on_menu_hover)
-		item.s_click_mine_sweep.connect(on_click_minesweep)
+		item.s_click_menu_item.connect(on_menu_click)
+		#item.s_click_mine_sweep.connect(on_click_minesweep)
 		#left_list.add_child(item)
 		games_menu.get_child(0).add_child(item)
 	next_state()
@@ -466,7 +470,7 @@ func open_start_menu():
 		var item = menu_item_ts.instantiate()
 		var id = MenuItem.eMenuID.ALL_PROGRAMS if obj.text == "All Programs" else MenuItem.eMenuID.NONE
 		item.init(id, obj.icon, obj.text, true)
-		item.s_hover_menu_item.connect(on_menu_hover)
+		item.s_click_menu_item.connect(on_menu_click)
 		left_list.add_child(item)
 		count = count + 1
 		if count == 2 or count == 8:
