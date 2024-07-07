@@ -644,8 +644,8 @@ func quit():
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#init()
-	debug_desktop()
+	init()
+	#debug_desktop()
 	pass # Replace with function body.
 
 func debug_desktop():
