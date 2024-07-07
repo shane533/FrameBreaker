@@ -193,28 +193,29 @@ func _on_avatar_tapped(is_double:bool):
 
 func avatar_shake():
 	tap_label.visible = true
-	avatar.rotation = 0.5
-	avatar.play("tap")
+	#avatar.rotation = 0.5
+	avatar.play("panic_and_fall")
 	var tween = create_tween()
-	tween.tween_property(avatar, "rotation", 0, 0.5).set_trans(Tween.TRANS_BOUNCE)
+	#tween.tween_property(avatar, "rotation", 0, 0.5).set_trans(Tween.TRANS_BOUNCE)
 	
-	tween.tween_interval(0.5)
+	tween.tween_interval(1)
 	#tween.tween_method(show_debug_text,)
 	tween.tween_callback(drop_bottom)
 	
 func drop_bottom():
-	avatar.stop()
-	avatar.play("hang")
+	#avatar.stop()
+	#avatar.play("hang")
 	print("DROP_BOTTOM")
 	$WX/Control/Content/FirstLine/AvatarFrame/GlassBreak.play()
 	var tween = create_tween()
-	tween.tween_property(bottom, "position:y", bottom.position.y + 1000, 1).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(bottom, "position:y", bottom.position.y + 1000, 0.5).set_trans(Tween.TRANS_QUAD)
 	tween.parallel().tween_property(bottom, "rotation", 1, 0.5).set_trans(Tween.TRANS_LINEAR)
-	tween.parallel().tween_property(avatar, "position", Vector2(avatar.position.x - 18, avatar.position.y+35), 0.5).set_trans(Tween.TRANS_SPRING)
+	tween.parallel().tween_property(avatar, "position", Vector2(avatar.position.x, avatar.position.y+35), 0.5).set_trans(Tween.TRANS_SPRING)
 	tween.tween_callback(scale_to_wx)
 	
 func scale_to_wx():
 	set_hang_anim()
+	avatar.position.x = avatar.position.x - 18
 	#scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	var tween = create_tween()
 	#var vp:Viewport = get_tree().root
@@ -252,7 +253,7 @@ func jump_down():
 	var tween = create_tween()
 	tween.tween_property(avatar, "position:y", avatar.position.y+FALL_HEIGHT, 0.5).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(avatar_anim.bind("land"))
-	tween.tween_interval(0.2)
+	tween.tween_interval(1)
 	tween.tween_callback(finish_tween_submit)
 
 func avatar_anim(ani):

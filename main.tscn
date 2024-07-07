@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=142 format=3 uid="uid://qsc1p3jienqa"]
 
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
 [ext_resource type="Script" path="res://main.gd" id="2_thuqy"]
@@ -45,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://bwt36i6c6o80h" path="res://Res/anim/look_up.png" id="34_e6sbh"]
 [ext_resource type="Script" path="res://mine_sweep.gd" id="39_avxpt"]
 [ext_resource type="Texture2D" uid="uid://0gw1dahvn302" path="res://Res/UI/minesweep/604×782_扫雷_空白背景.png" id="39_mi45q"]
+[ext_resource type="Texture2D" uid="uid://bkra5dvxa78ax" path="res://Res/anim/panic_and_fall.png" id="39_tlq6s"]
 [ext_resource type="FontFile" uid="uid://bdlo0w3gdm85o" path="res://Res/font/windows-xp-tahoma/windows-xp-tahoma.ttf" id="41_6wad0"]
 [ext_resource type="AudioStream" uid="uid://da4k2aj5i634c" path="res://Res/sfx/glasscrash.mp3" id="42_cilv5"]
 [ext_resource type="AudioStream" uid="uid://cgyl634dmlclt" path="res://Res/sfx/wx/new_message.mp3" id="44_uubcy"]
@@ -320,6 +321,38 @@ region = Rect2(700, 0, 100, 100)
 atlas = ExtResource("7_033ip")
 region = Rect2(800, 0, 100, 100)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw2cx"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e03n"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exlsh"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwp4c"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tw6r"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm17v"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pcoc"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub2r1"]
+atlas = ExtResource("39_tlq6s")
+region = Rect2(700, 0, 100, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_be1uh"]
 atlas = ExtResource("22_lxhip")
 region = Rect2(0, 0, 100, 100)
@@ -592,6 +625,35 @@ animations = [{
 "loop": true,
 "name": &"normal_jump",
 "speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw2cx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3e03n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exlsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwp4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tw6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm17v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pcoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub2r1")
+}],
+"loop": false,
+"name": &"panic_and_fall",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -901,7 +963,7 @@ texture = ExtResource("5_3itt8")
 position = Vector2(35, 34.5)
 scale = Vector2(0.72, 0.72)
 sprite_frames = SubResource("SpriteFrames_5jayf")
-animation = &"idle3"
+animation = &"panic_and_fall"
 script = ExtResource("6_uww3v")
 
 [node name="GlassBreak" type="AudioStreamPlayer2D" parent="WX/Control/Content/FirstLine/AvatarFrame"]
