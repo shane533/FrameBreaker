@@ -71,9 +71,12 @@ func _on_open_field(is_mine: bool):
 	if is_mine:
 		explode()
 	
-func _on_flag_mine():
+func _on_flag_mine(is_flag: bool):
 	print("flag mine")
-	_total_mine -= 1
+	if is_flag:
+		_total_mine -= 1
+	else:
+		_total_mine += 1
 	update_display()
 
 func update_display():

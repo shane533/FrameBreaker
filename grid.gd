@@ -1,7 +1,7 @@
 extends Node2D
 
 signal s_open_field(is_explode)
-signal s_flag_mine
+signal s_flag_mine(is_flag)
 
 var _is_mine: bool
 var _num: int
@@ -26,9 +26,11 @@ func open_field():
 	s_open_field.emit(_is_mine)
 
 func flag_mine():
-	_is_flaged = true
+	if _is_opened:
+		return
+	_is_flaged = not _is_flaged
 	update_display()
-	s_flag_mine.emit()
+	s_flag_mine.emit(_is_flaged)
 	
 func update_display():
 	flag.visible = _is_flaged
