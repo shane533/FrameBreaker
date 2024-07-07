@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=146 format=3 uid="uid://qsc1p3jienqa"]
 
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
 [ext_resource type="Script" path="res://main.gd" id="2_thuqy"]
@@ -57,6 +57,20 @@
 [ext_resource type="Texture2D" uid="uid://cbf25602tods7" path="res://Res/UI/minesweep/face2_按钮.png" id="51_6vjmi"]
 [ext_resource type="Texture2D" uid="uid://dsr6ggdxm8nlx" path="res://Res/UI/task_bottom/ms.png" id="51_jentf"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_huing"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_k0vho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_7mevu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="LabelSettings" id="LabelSettings_ccngg"]
 font = ExtResource("41_6wad0")
 font_size = 32
@@ -70,6 +84,9 @@ shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofpy5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfnrs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ebvrl"]
+font_color = Color(0.717647, 0.717647, 0.717647, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k58nl"]
 atlas = ExtResource("27_4i3w1")
@@ -339,21 +356,21 @@ region = Rect2(200, 0, 100, 100)
 atlas = ExtResource("39_tlq6s")
 region = Rect2(300, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7tw6r"]
-atlas = ExtResource("39_tlq6s")
-region = Rect2(400, 0, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn36q"]
+atlas = ExtResource("27_4i3w1")
+region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rm17v"]
-atlas = ExtResource("39_tlq6s")
-region = Rect2(500, 0, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggvi0"]
+atlas = ExtResource("27_4i3w1")
+region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8pcoc"]
-atlas = ExtResource("39_tlq6s")
-region = Rect2(600, 0, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqp3x"]
+atlas = ExtResource("27_4i3w1")
+region = Rect2(200, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ub2r1"]
-atlas = ExtResource("39_tlq6s")
-region = Rect2(700, 0, 100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xuru"]
+atlas = ExtResource("27_4i3w1")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_be1uh"]
 atlas = ExtResource("22_lxhip")
@@ -642,16 +659,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_rwp4c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7tw6r")
+"texture": SubResource("AtlasTexture_fn36q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rm17v")
+"texture": SubResource("AtlasTexture_ggvi0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8pcoc")
+"texture": SubResource("AtlasTexture_gqp3x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ub2r1")
+"texture": SubResource("AtlasTexture_8xuru")
 }],
 "loop": false,
 "name": &"panic_and_fall",
@@ -715,20 +732,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_huing"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("49_k0vho")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_7mevu")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="Sprite2D" node_paths=PackedStringArray("avatar", "bottom", "content", "newLineMine", "newLineYours", "wx_yundong", "tap_label", "input_text", "scroller", "start_menu", "left_list", "right_list", "second_menu", "games_menu", "mine_sweep", "name_label")]
 position = Vector2(-2016, -379)
 scale = Vector2(1.7, 1.7)
@@ -760,6 +763,16 @@ texture_normal = ExtResource("3_v3woo")
 texture_pressed = ExtResource("4_o34rx")
 texture_hover = ExtResource("5_ff7vl")
 texture_focused = ExtResource("5_ff7vl")
+
+[node name="BottomWX" type="AnimatedSprite2D" parent="."]
+position = Vector2(188, 945)
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_huing")
+
+[node name="BottomMS" type="Sprite2D" parent="."]
+position = Vector2(345, 945)
+scale = Vector2(1, 1)
+texture = ExtResource("51_jentf")
 
 [node name="StartMenu" type="TextureRect" parent="."]
 offset_top = 418.0
@@ -944,6 +957,15 @@ offset_right = 933.0
 offset_bottom = 632.0
 texture = ExtResource("16_8301b")
 
+[node name="Label" type="Label" parent="WX/Control/Content/TextureRect"]
+layout_mode = 0
+offset_left = 225.882
+offset_top = 123.529
+offset_right = 321.882
+offset_bottom = 146.529
+text = "妈妈拍了拍你"
+label_settings = SubResource("LabelSettings_ebvrl")
+
 [node name="TapLabel" type="TextureRect" parent="WX/Control/Content"]
 layout_mode = 0
 offset_left = 586.0
@@ -980,7 +1002,7 @@ texture = ExtResource("5_3itt8")
 position = Vector2(35, 34.5)
 scale = Vector2(0.72, 0.72)
 sprite_frames = SubResource("SpriteFrames_5jayf")
-animation = &"panic_and_fall"
+animation = &"jump"
 script = ExtResource("6_uww3v")
 
 [node name="GlassBreak" type="AudioStreamPlayer2D" parent="WX/Control/Content/FirstLine/AvatarFrame"]
@@ -1072,14 +1094,6 @@ stream = ExtResource("49_ec5wj")
 
 [node name="ClickSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("48_8osid")
-
-[node name="BottomWX" type="AnimatedSprite2D" parent="."]
-position = Vector2(188, 945)
-sprite_frames = SubResource("SpriteFrames_huing")
-
-[node name="BottomMS" type="Sprite2D" parent="."]
-position = Vector2(345, 945)
-texture = ExtResource("51_jentf")
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="text_submitted" from="WX/Control/TextEdit" to="." method="_on_text_edit_text_submitted"]

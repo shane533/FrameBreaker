@@ -30,7 +30,7 @@ var _is_start: bool = false
 var grid_ts = load("res://grid.tscn")
 
 func init():
-	_total_mine = 0
+	_total_mine = -1
 	for i in range(6):
 		for j in range(6):
 			var value = minefield[i][j]

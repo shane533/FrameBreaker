@@ -151,6 +151,7 @@ var _focus_on_avatar_frame:bool = false
 
 var _start_tap_count = 0
 var _is_desktop_debug = false
+var _total_click_count = 0
 
 func init():
 	name_label.text = "妈"
@@ -162,6 +163,7 @@ func init():
 	
 func init_wx():
 	print("INIT_WX")
+	_total_click_count = 0
 	#content.position = Vector2(0, 100)
 	get_viewport().size = Vector2(WX_W, WX_H)
 	get_window().size = Vector2(WX_W, WX_H)
@@ -170,6 +172,7 @@ func init_wx():
 	_state = GameState.TRAPPED_IN_AVATAR
 	tap_label.visible = false
 	$WX.visible = true
+	scroller.visible = false
 	#avatar.position.x = AVATAR_INIT_X
 	#avatar.position.y = AVATAR_INIT_Y
 	avatar.play("jump")
@@ -216,6 +219,7 @@ func drop_bottom():
 func scale_to_wx():
 	set_hang_anim()
 	avatar.position.x = avatar.position.x - 18
+	scroller.visible = true
 	#scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	var tween = create_tween()
 	#var vp:Viewport = get_tree().root
@@ -276,6 +280,7 @@ func finish_tween_submit():
 
 func climb_to_left_list():
 	avatar.get_parent().remove_child(avatar)
+	#input_text.visible = false
 	wx_yundong.add_child(avatar)
 	avatar.position = Vector2(100, -40)
 	avatar.play("look_up")
@@ -502,6 +507,7 @@ func scale_to_desktop():
 	avatar.play("idle")
 	get_window().size = Vector2(1280, 960)
 	var vp = get_viewport()
+	vp.position.y = vp.position.y - 100
 	var tween = create_tween()
 	tween.tween_property(vp, "size", Vector2(1280, 960), 1)
 	tween.parallel().tween_property(self, "position", Vector2(0,0), 1)
@@ -545,9 +551,22 @@ func _input(event):
 	elif event is InputEventMouseButton:
 		if event.is_pressed():
 			$ClickSFX.play()
+			if _state == GameState.TRAPPED_IN_AVATAR:
+				_total_click_count += 1
+				if _total_click_count>=5:
+					shake_frame()
+					
+					_total_click_count = 0
 			if event.is_pressed() and _focus_on_avatar_frame:
 				_on_avatar_tapped(event.double_click)
 					
+func shake_frame():
+	var tween = create_tween()
+	var frame = $WX/Control/Content/FirstLine/AvatarFrame
+	var x = frame.position.x
+	tween.tween_property(frame, "position:x", x-10, 0.2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(frame, "position:x", x+10, 0.2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(frame, "position:x", x, 0.2).set_trans(Tween.TRANS_CUBIC)
 
 func debug():
 	save_poster()
@@ -643,7 +662,7 @@ func end_game():
 	var label_ts = load("res://game_over.tscn")
 	var go_label = label_ts.instantiate()
 	self.add_child(go_label)
-	go_label.scale = Vector2(3, 3)
+	go_label.scale = Vector2(2, 2)
 	go_label.position = self.to_local(get_window().size/3)
 	save_poster()
 	
@@ -651,19 +670,21 @@ func end_game():
 	achi.centered = false
 	achi.texture = load("res://Res/UI/achievement.png")
 	self.add_child(achi)
-	achi.position = Vector2(get_window().size.x - achi.get_rect().size.x, get_window().size.y )
+	achi.position = Vector2(get_window().size.x - achi.get_rect().size.x - achi.get_parent().position.x, get_window().size.y - achi.get_parent().position.y )
 	
 	var tn = create_tween()
 	tn.tween_interval(1)
-	tn.tween_property(achi, "position:y", get_window().size.y - achi.get_rect().size.y, 1)
+	tn.tween_property(achi, "position:y", get_window().size.y - achi.get_rect().size.y- achi.get_parent().position.y, 0.5)
 	tn.tween_property(go_label, "text", "See you in your %HOME%!", 1)
-	tn.tween_property(achi, "position:y", get_window().size.y, 1)
+	tn.tween_interval(2)
+	tn.tween_property(achi, "position:y", get_window().size.y- achi.get_parent().position.y, 0.5)
 	tn.tween_interval(1)
 	tn.tween_callback(quit)
 	
 	
 func quit():
 	get_tree().quit()	
+	pass
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -717,6 +738,12 @@ func _on_avatar_animation_finished():
 # Submit
 func _on_button_pressed():
 	print("Button Pressed")
+	if _state == GameState.WAIT_FOR_SCROLL and input_text.text != "":
+		input_text.text = "需要提示吗？试试滚轮"
+		return
+	if _state == GameState.WAIT_FOR_START_MENU and input_text.text != "":
+		input_text.text = "需要提示吗？看看下方有什么可以点击"
+		return
 	if _state != GameState.HANG_IN_AVATAR or input_text.text == "":
 		return
 	next_state()

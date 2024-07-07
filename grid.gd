@@ -21,6 +21,8 @@ func init(is_mine, num):
 	update_display()
 
 func open_field():
+	if _is_flaged:
+		return
 	_is_opened = true
 	update_display()
 	s_open_field.emit(_is_mine)
