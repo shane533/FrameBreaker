@@ -22,6 +22,7 @@ var _grids = [
 
 @export var mine_count: Label
 @export var time_count: Label
+@export var smile: AnimatedSprite2D
 
 var _total_mine = 0
 var _total_time = 0
@@ -46,6 +47,7 @@ func init():
 	print()
 	
 func start_game():
+	smile.frame = 0
 	print("START_GAME")
 	_is_start = true
 	tween_time()
@@ -78,6 +80,7 @@ func update_display():
 	mine_count.text = "%d" % _total_mine
 	
 func explode():
+	smile.frame = 1
 	_is_start = false
 	s_explode.emit()
 

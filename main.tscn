@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=145 format=3 uid="uid://qsc1p3jienqa"]
 
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
 [ext_resource type="Script" path="res://main.gd" id="2_thuqy"]
@@ -53,6 +53,8 @@
 [ext_resource type="AudioStream" uid="uid://bwnwuqv2n8nwt" path="res://Res/sfx/minesweep/explode.mp3" id="49_ec5wj"]
 [ext_resource type="Texture2D" uid="uid://dkbmhgqrsw7j8" path="res://Res/UI/task_bottom/wx1.png" id="49_k0vho"]
 [ext_resource type="Texture2D" uid="uid://by1e1vn2pdxr5" path="res://Res/UI/task_bottom/wx2.png" id="50_7mevu"]
+[ext_resource type="Texture2D" uid="uid://c4sn4l7klnhpo" path="res://Res/UI/minesweep/face1_按钮.png" id="50_rayo6"]
+[ext_resource type="Texture2D" uid="uid://cbf25602tods7" path="res://Res/UI/minesweep/face2_按钮.png" id="51_6vjmi"]
 [ext_resource type="Texture2D" uid="uid://dsr6ggdxm8nlx" path="res://Res/UI/task_bottom/ms.png" id="51_jentf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ccngg"]
@@ -699,6 +701,20 @@ font = ExtResource("41_6wad0")
 font_size = 48
 font_color = Color(1, 0, 0.0470588, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_l2iju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_rayo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_6vjmi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_huing"]
 animations = [{
 "frames": [{
@@ -836,6 +852,7 @@ offset_right = 399.0
 offset_bottom = 798.0
 scroll_vertical = 100
 horizontal_scroll_mode = 0
+scroll_deadzone = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WX/Control/ScrollContainer"]
 layout_mode = 2
@@ -1011,7 +1028,7 @@ offset_top = 284.5
 offset_right = 906.0
 offset_bottom = 349.5
 
-[node name="MineSweep" type="Sprite2D" parent="." node_paths=PackedStringArray("mine_count", "time_count")]
+[node name="MineSweep" type="Sprite2D" parent="." node_paths=PackedStringArray("mine_count", "time_count", "smile")]
 visible = false
 position = Vector2(670, 75)
 texture = ExtResource("39_mi45q")
@@ -1019,6 +1036,7 @@ centered = false
 script = ExtResource("39_avxpt")
 mine_count = NodePath("Label")
 time_count = NodePath("Label2")
+smile = NodePath("Smile")
 
 [node name="Label" type="Label" parent="MineSweep"]
 offset_left = 65.0
@@ -1035,6 +1053,11 @@ offset_right = 530.0
 offset_bottom = 170.0
 text = "0"
 label_settings = SubResource("LabelSettings_g0dqh")
+
+[node name="Smile" type="AnimatedSprite2D" parent="MineSweep"]
+position = Vector2(302.941, 145)
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_l2iju")
 
 [node name="Avatar2" type="AnimatedSprite2D" parent="MineSweep"]
 visible = false

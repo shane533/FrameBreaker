@@ -646,10 +646,19 @@ func end_game():
 	go_label.scale = Vector2(3, 3)
 	go_label.position = self.to_local(get_window().size/3)
 	save_poster()
+	
+	var achi = Sprite2D.new()
+	achi.centered = false
+	achi.texture = load("res://Res/UI/achievement.png")
+	self.add_child(achi)
+	achi.position = Vector2(get_window().size.x - achi.get_rect().size.x, get_window().size.y )
+	
 	var tn = create_tween()
 	tn.tween_interval(1)
+	tn.tween_property(achi, "position:y", get_window().size.y - achi.get_rect().size.y, 1)
 	tn.tween_property(go_label, "text", "See you in your %HOME%!", 1)
-	tn.tween_interval(3)
+	tn.tween_property(achi, "position:y", get_window().size.y, 1)
+	tn.tween_interval(1)
 	tn.tween_callback(quit)
 	
 	
