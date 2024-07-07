@@ -19,6 +19,7 @@ config/icon="res://Res/UI/icon.png"
 
 window/size/viewport_width=960
 window/size/viewport_height=800
+window/size/resizable=false
 
 [rendering]
 

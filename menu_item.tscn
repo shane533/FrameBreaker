@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu1mtuuva45sf"]
+[gd_scene load_steps=7 format=3 uid="uid://bu1mtuuva45sf"]
 
 [ext_resource type="Script" path="res://menu_item.gd" id="1_qaqcx"]
 [ext_resource type="Texture2D" uid="uid://vnfk1pdrsj8s" path="res://Res/UI/menu/blue_1.png" id="2_t0xa5"]
 [ext_resource type="Texture2D" uid="uid://bhpvkervvosok" path="res://Res/Icon/menu_icon/MyGames.png" id="3_ym6l1"]
 [ext_resource type="FontFile" uid="uid://bdlo0w3gdm85o" path="res://Res/font/windows-xp-tahoma/windows-xp-tahoma.ttf" id="4_7kpxs"]
+[ext_resource type="Texture2D" uid="uid://jqqymotwo2pl" path="res://Res/UI/menu/arrow_black.png" id="5_3iwqs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5scg"]
 font = ExtResource("4_7kpxs")
 font_size = 24
 font_color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="Control" node_paths=PackedStringArray("highlight", "icon", "label")]
+[node name="TextureRect" type="Control" node_paths=PackedStringArray("highlight", "icon", "label", "arrow")]
 custom_minimum_size = Vector2(200, 45)
 layout_mode = 3
 anchors_preset = 0
@@ -18,6 +19,7 @@ script = ExtResource("1_qaqcx")
 highlight = NodePath("Highlight")
 icon = NodePath("Icon")
 label = NodePath("Label")
+arrow = NodePath("Arrow")
 
 [node name="Highlight" type="TextureRect" parent="."]
 layout_mode = 2
@@ -43,6 +45,15 @@ offset_right = 186.0
 offset_bottom = 44.0
 text = "Minesweep"
 label_settings = SubResource("LabelSettings_e5scg")
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 12.0
+offset_right = 224.0
+offset_bottom = 52.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_3iwqs")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

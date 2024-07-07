@@ -1,6 +1,5 @@
-[gd_scene load_steps=131 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=133 format=3 uid="uid://qsc1p3jienqa"]
 
-[ext_resource type="Texture2D" uid="uid://bgxyslds8up10" path="res://Res/UI/wx/wx_bg.png" id="1_v0lvc"]
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
 [ext_resource type="Script" path="res://main.gd" id="2_thuqy"]
 [ext_resource type="Texture2D" uid="uid://11t67ydofdrd" path="res://Res/LeftList/1_.png" id="3_c85r1"]
@@ -24,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dblgcnfby75r1" path="res://Res/LeftList/7_.png" id="9_n605n"]
 [ext_resource type="Texture2D" uid="uid://b2kuqg1dqmpk1" path="res://Res/LeftList/8_.png" id="10_g8hqu"]
 [ext_resource type="Texture2D" uid="uid://dqkhrx74u5ap" path="res://Res/anim/idle.png" id="11_o0qj7"]
+[ext_resource type="Texture2D" uid="uid://bgabcpcibw8wa" path="res://Res/UI/wx/960×800_背景2.png" id="11_saxwd"]
 [ext_resource type="Texture2D" uid="uid://2sa8ug6m5080" path="res://Res/LeftList/9_.png" id="11_wnqba"]
 [ext_resource type="Texture2D" uid="uid://ccx6070272jv7" path="res://Res/anim/jump.png" id="12_regol"]
 [ext_resource type="Texture2D" uid="uid://uo5e86ng13td" path="res://Res/LeftList/10_.png" id="12_t4nbc"]
@@ -45,10 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://bwt36i6c6o80h" path="res://Res/anim/look_up.png" id="34_e6sbh"]
 [ext_resource type="Script" path="res://mine_sweep.gd" id="39_avxpt"]
 [ext_resource type="Texture2D" uid="uid://0gw1dahvn302" path="res://Res/UI/minesweep/604×782_扫雷_空白背景.png" id="39_mi45q"]
-[ext_resource type="AudioStream" uid="uid://be25gvewa7neh" path="res://Res/sfx/glass_break.mp3" id="40_4xqhp"]
 [ext_resource type="FontFile" uid="uid://bdlo0w3gdm85o" path="res://Res/font/windows-xp-tahoma/windows-xp-tahoma.ttf" id="41_6wad0"]
+[ext_resource type="AudioStream" uid="uid://da4k2aj5i634c" path="res://Res/sfx/glasscrash.mp3" id="42_cilv5"]
 [ext_resource type="AudioStream" uid="uid://cgyl634dmlclt" path="res://Res/sfx/wx/new_message.mp3" id="44_uubcy"]
 [ext_resource type="AudioStream" uid="uid://clanvqf2t6o43" path="res://Res/sfx/mouse/click.wav" id="48_8osid"]
+[ext_resource type="AudioStream" uid="uid://bwnwuqv2n8nwt" path="res://Res/sfx/minesweep/explode.mp3" id="49_ec5wj"]
 [ext_resource type="Texture2D" uid="uid://dkbmhgqrsw7j8" path="res://Res/UI/task_bottom/wx1.png" id="49_k0vho"]
 [ext_resource type="Texture2D" uid="uid://by1e1vn2pdxr5" path="res://Res/UI/task_bottom/wx2.png" id="50_7mevu"]
 [ext_resource type="Texture2D" uid="uid://dsr6ggdxm8nlx" path="res://Res/UI/task_bottom/ms.png" id="51_jentf"]
@@ -56,6 +57,12 @@
 [sub_resource type="LabelSettings" id="LabelSettings_ccngg"]
 font = ExtResource("41_6wad0")
 font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_88kmg"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofpy5"]
 
@@ -644,7 +651,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Sprite2D" node_paths=PackedStringArray("avatar", "bottom", "content", "newLineMine", "newLineYours", "wx_yundong", "tap_label", "input_text", "scroller", "start_menu", "left_list", "right_list", "second_menu", "games_menu", "mine_sweep")]
+[node name="Node2D" type="Sprite2D" node_paths=PackedStringArray("avatar", "bottom", "content", "newLineMine", "newLineYours", "wx_yundong", "tap_label", "input_text", "scroller", "start_menu", "left_list", "right_list", "second_menu", "games_menu", "mine_sweep", "name_label")]
 position = Vector2(-2016, -379)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("1_ytt4q")
@@ -665,6 +672,7 @@ right_list = NodePath("StartMenu/RightList")
 second_menu = NodePath("StartMenu/AllPrograms")
 games_menu = NodePath("StartMenu/GameMenu")
 mine_sweep = NodePath("MineSweep")
+name_label = NodePath("WX/Control/NameLabel")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_top = 930.0
@@ -740,7 +748,7 @@ offset_bottom = 40.0
 
 [node name="WX" type="Sprite2D" parent="."]
 position = Vector2(315, 120)
-texture = ExtResource("1_v0lvc")
+texture = ExtResource("11_saxwd")
 centered = false
 
 [node name="Control" type="Control" parent="WX"]
@@ -748,6 +756,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="NameLabel" type="Label" parent="WX/Control"]
+layout_mode = 0
+offset_left = 412.647
+offset_top = 25.2941
+offset_right = 452.647
+offset_bottom = 60.2941
+text = "妈"
+label_settings = SubResource("LabelSettings_88kmg")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WX/Control"]
 layout_mode = 0
@@ -888,7 +905,7 @@ animation = &"idle3"
 script = ExtResource("6_uww3v")
 
 [node name="GlassBreak" type="AudioStreamPlayer2D" parent="WX/Control/Content/FirstLine/AvatarFrame"]
-stream = ExtResource("40_4xqhp")
+stream = ExtResource("42_cilv5")
 
 [node name="NewLineMine" type="TextureRect" parent="WX/Control/Content"]
 layout_mode = 0
@@ -964,6 +981,9 @@ scale = Vector2(0.72, 0.72)
 sprite_frames = SubResource("SpriteFrames_5jayf")
 animation = &"normal_jump"
 script = ExtResource("6_uww3v")
+
+[node name="ExplodeSFX" type="AudioStreamPlayer2D" parent="MineSweep"]
+stream = ExtResource("49_ec5wj")
 
 [node name="ClickSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("48_8osid")

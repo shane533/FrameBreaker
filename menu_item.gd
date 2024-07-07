@@ -15,6 +15,7 @@ signal s_click_mine_sweep
 @export var highlight: TextureRect
 @export var icon: TextureRect
 @export var label: Label
+@export var arrow: TextureRect
 
 var _id: eMenuID 
 var _is_sub: bool
@@ -22,6 +23,7 @@ var _is_sub: bool
 func init(id, url, dname, is_sub):
 	_id = id
 	_is_sub = is_sub
+	arrow.visible = id == eMenuID.GAMES
 	highlight.visible = false
 	highlight.texture = load("res://Res/UI/menu/blue_1.png") if is_sub else load("res://Res/UI/menu/blue_2.png")
 	var png = "res://Res/Icon/menu_icon/%s" % url 
@@ -39,9 +41,10 @@ func update_state(is_highlight:bool):
 	if is_highlight:
 		label.label_settings.font_color = Color.WHITE
 		#set("theme_override_colors/font_color", Color.WHITE)
-		
+		arrow.texture = load("res://Res/UI/menu/arrow_white.png")
 	else:
 		label.label_settings.font_color = Color.BLACK
+		arrow.texture = load("res://Res/UI/menu/arrow_black.png")
 		#set("theme_override_colors/font_color", Color.BLACK)
 	
 # Called when the node enters the scene tree for the first time.

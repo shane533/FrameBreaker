@@ -141,6 +141,7 @@ const BOUNCE_TIMES:int = 7
 @export var second_menu: Control
 @export var games_menu: Control
 @export var mine_sweep: MineSweep
+@export var name_label: Label
 
 var menu_item_ts = load("res://menu_item.tscn")
 
@@ -152,6 +153,7 @@ var _start_tap_count = 0
 var _is_desktop_debug = false
 
 func init():
+	name_label.text = "妈"
 	_state = GameState.BEFORE_START
 	get_viewport().size = Vector2(INIT_W, INIT_H)
 	get_window().size = Vector2(INIT_W, INIT_H)
@@ -234,14 +236,16 @@ func after_submit_text():
 		newLineMine.visible = true
 		newLineMine.get_child(1).text = "锟斤拷烫烫烫"#input_text.text
 		input_text.text = ""
+		name_label.text = "正在输入中..."
 		var tween = create_tween()
 		tween.tween_property(content, "position:y", 50, 0.1)
-		tween.tween_interval(1)
+		tween.tween_interval(3)
 		tween.tween_property(content, "position:y", 0, 0.1)
 		
 		tween.tween_callback(jump_down)
 
 func jump_down():
+	name_label.text = "妈"
 	newLineYours.visible = true
 	$WX/Control/Content/NewLineYours/NewMessage.play()
 	avatar.play("fall")
@@ -549,7 +553,7 @@ func save_poster():
 	tex.get_image().save_png("user://FrameBreaker.png")
 					
 func explode():
-	
+	$MineSweep/ExplodeSFX.play()
 	var direction = [1,3,7,9].pick_random()
 	#direction = 3
 
