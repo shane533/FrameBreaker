@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://qsc1p3jienqa"]
+[gd_scene load_steps=131 format=3 uid="uid://qsc1p3jienqa"]
 
 [ext_resource type="Texture2D" uid="uid://bgxyslds8up10" path="res://Res/UI/wx/wx_bg.png" id="1_v0lvc"]
 [ext_resource type="Texture2D" uid="uid://dvmva7y0mseeo" path="res://Res/desktop.jpg" id="1_ytt4q"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dc11mg6ajbvbl" path="res://Res/UI/start_menu_bg/开始菜单_空白背景.png" id="6_wed06"]
 [ext_resource type="Texture2D" uid="uid://pnkcofvvum1p" path="res://Res/anim/normal_jump.png" id="7_033ip"]
 [ext_resource type="Texture2D" uid="uid://dfcxljhp56jr0" path="res://Res/anim/grab.png" id="7_88i0k"]
+[ext_resource type="Texture2D" uid="uid://c2t5yttt0sq42" path="res://Res/UI/icon.png" id="7_g88c3"]
 [ext_resource type="Texture2D" uid="uid://cgcdj2xe4mdn2" path="res://Res/LeftList/5_.png" id="7_o0tnf"]
 [ext_resource type="Texture2D" uid="uid://hc6tkkw02o1e" path="res://Res/anim/walk.png" id="7_w0hse"]
 [ext_resource type="Texture2D" uid="uid://cjtja0jdj5vrs" path="res://Res/LeftList/6_.png" id="8_a60jb"]
@@ -680,6 +681,15 @@ offset_right = 386.0
 offset_bottom = 930.0
 texture = ExtResource("6_wed06")
 
+[node name="Icon" type="TextureRect" parent="StartMenu"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 62.0
+texture = ExtResource("7_g88c3")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="StartMenu"]
 layout_mode = 0
 offset_left = 68.2353
@@ -899,9 +909,9 @@ texture = ExtResource("6_kij2g")
 [node name="Label" type="Label" parent="WX/Control/Content/NewLineMine"]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 8.0
-offset_right = 51.0
-offset_bottom = 31.0
+offset_top = 12.0
+offset_right = 233.0
+offset_bottom = 46.0
 label_settings = SubResource("LabelSettings_5ijkg")
 
 [node name="NewLineYours" type="TextureRect" parent="WX/Control/Content"]

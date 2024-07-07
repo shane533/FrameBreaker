@@ -37,10 +37,10 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 63.0
-offset_top = 14.0
-offset_right = 196.0
-offset_bottom = 48.0
+offset_left = 53.0
+offset_top = 10.0
+offset_right = 186.0
+offset_bottom = 44.0
 text = "Minesweep"
 label_settings = SubResource("LabelSettings_e5scg")
 

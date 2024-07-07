@@ -16,7 +16,7 @@ var MenuItemConfigLeft = [
 	"text" : "Alleycatneko"
 	},
 	{"icon" : "Paint.png",
-	"text" : "Fan"
+	"text" : "Fandy"
 	},
 	{"icon" : "Paint.png",
 	"text" : "orin"
@@ -148,6 +148,7 @@ var _state: GameState
 var _can_input: bool
 var _focus_on_avatar_frame:bool = false
 
+var _start_tap_count = 0
 var _is_desktop_debug = false
 
 func init():
@@ -178,10 +179,15 @@ func init_wx():
 	#tween.parallel().tween_property(get_window(), "size", Vector2(WX_W, WX_H), 1)
 	#self.position = 
 
-func _on_avatar_tapped():
+func _on_avatar_tapped(is_double:bool):
 	print("Avatar Tapped")
-	if _state == GameState.TRAPPED_IN_AVATAR or _state == GameState.BEFORE_START:
+	if _state == GameState.TRAPPED_IN_AVATAR and is_double:
 		next_state()
+		
+	if  _state == GameState.BEFORE_START:
+		_start_tap_count += 1
+		if _start_tap_count >= 3:
+			next_state()
 
 func avatar_shake():
 	tap_label.visible = true
@@ -266,6 +272,7 @@ func climb_to_left_list():
 	wx_yundong.add_child(avatar)
 	avatar.position = Vector2(100, -40)
 	avatar.play("look_up")
+	scroller.scroll_vertical = 100
 	#scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	next_state()
 
@@ -529,11 +536,9 @@ func _input(event):
 	elif event is InputEventMouseButton:
 		if event.is_pressed():
 			$ClickSFX.play()
-			if event.double_click and event.is_pressed():
-				#avatar.sprite_frames[avatar.frame].get_
-				if _focus_on_avatar_frame:
-					print("DOUBLE_CLICK_BBBBB")
-					_on_avatar_tapped()
+			if event.is_pressed() and _focus_on_avatar_frame:
+				_on_avatar_tapped(event.double_click)
+					
 
 func debug():
 	save_poster()
@@ -634,7 +639,7 @@ func end_game():
 	save_poster()
 	var tn = create_tween()
 	tn.tween_interval(1)
-	tn.tween_property(go_label, "text", "See you in your %HOME!", 1)
+	tn.tween_property(go_label, "text", "See you in your %HOME%!", 1)
 	tn.tween_interval(3)
 	tn.tween_callback(quit)
 	
